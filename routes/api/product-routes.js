@@ -12,21 +12,26 @@ router.get('/', async (req, res) => {
 
 // get one product
 router.get('/:id', (req, res) => {
+    const data= Product.findOne({Category,Tag})
+    console.log(data)
+    res.json(data)
+
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
-});
+})
 
 // create new product
 router.post('/', (req, res) => {
-  /* req.body should look like this...
+  const data=  Product.create(
     {
-      product_name: "Basketball",
-      price: 200.00,
-      stock: 3,
+      product_name: "Foam finger",
+      price: 70.00,
+      stock: 5,
       tagIds: [1, 2, 3, 4]
     }
-  */
-  Product.create(req.body)
+  )
+
+  Product.create (req.body) 
     .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
       if (req.body.tagIds.length) {
