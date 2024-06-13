@@ -16,9 +16,21 @@ router.get('/:id', async (req, res) => {
     console.log(data)
     res.json(data)
 
-  // find a single product by its `id`
-  // be sure to include its associated Category and Tag data
+
 })
+router.put('/:id', async(req, res) => {
+  const data = await Product.update(req.body, {where:{id:req.params.id}})
+  console.log(data)
+  res.json(data)
+});
+
+router.delete('/:id',async (req, res) => {
+  const data = await Product.destroy({where:{id:req.params.id}})
+  console.log(data)
+  res.json(data)
+});
+
+
 
 // create new product
 router.post('/', async (req, res) => {
