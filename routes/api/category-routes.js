@@ -17,7 +17,7 @@ const { Category, Product } = require('../../models');
 router.get('/:id', async (req, res) => {
   // find one category by its `id` value
   // be sure to include its associated Products
-  const data = await Category.findOne({id,Category,Product})
+  const data = await Category.findOne({where:{id:req.params.id}})
   console.log(data)
   res.json(data)
 });
@@ -26,21 +26,21 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async(req, res) => {
   // create a new category
-  const data = await Category.create({id})
+  const data = await Category.create(req.body)
   console.log(data)
   res.json(data)
 });
 
 router.put('/:id', async (req, res) => {
   // update a category by its `id` value
-  const data = await Category.update({id})
+  const data = await Category.update(req.body,{where:{id:req.params.id}})
   console.log(data)
   res.json(data)
 });
 
 router.delete('/:id', async (req, res) => {
   // delete a category by its `id` value
-   const data = await Category.destroy({id})
+   const data = await Category.destroy({where:{id:req.params.id}})
   console.log(data)
   res.json(data)
 
